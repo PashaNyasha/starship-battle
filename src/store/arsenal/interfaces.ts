@@ -3,6 +3,7 @@ export interface IBullet {
   bulletY: number;
   bulletImageSrc: string;
   bulletSize: number;
+  bulletDmg: number;
 }
 
 export interface IArsenalStorage {

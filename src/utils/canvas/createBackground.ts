@@ -1,4 +1,5 @@
 import { ctx } from "../..";
+import { BLACK_COLOR, WHITE_COLOR } from "../../constants/colors";
 import { ICanvasSize } from "../../store/canvas/interfaces";
 import { getShipSpeedSelector } from "../../store/ship/selectors";
 import { StoreType } from "../../store/store";
@@ -16,9 +17,9 @@ export const createBackground = ({
 }: ParamsType) => {
   const speed = getShipSpeedSelector(state);
 
-  ctx.fillStyle = "#000";
+  ctx.fillStyle = BLACK_COLOR;
   ctx.fillRect(0, 0, canvasWidth, canvasHeight);
-  ctx.fillStyle = "#fff";
+  ctx.fillStyle = WHITE_COLOR;
 
   for (let i = 0; i < speed; i++) {
     ctx.fillRect(getRand(canvasWidth), getRand(canvasHeight), 2, 2);

@@ -6,6 +6,7 @@ import { changeShipDirection } from "./ship/changeShipDirection";
 import { createBackground } from "./canvas/createBackground";
 import { getHUD } from "./HUD/getHUD";
 import { getShoot } from "./arsenal/getShoot";
+import { getAliens } from "./aliens/getAliens";
 
 const { getState } = store;
 const oldState = getState();
@@ -23,6 +24,7 @@ export const playGame = () => {
 
   changeShipDirection({ state, speed: SHIP_SPEED_VARIANTS.normal });
   getShoot(state);
+  getAliens(state);
   getHUD(state);
   requestAnimationFrame(playGame);
 };

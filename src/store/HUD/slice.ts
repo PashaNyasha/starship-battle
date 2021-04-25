@@ -9,6 +9,7 @@ export const initialStateHUD: IHUDStorage = {
   lifeGaugeWidth: 350,
   hotMeter: 0,
   isHot: false,
+  score: 0,
 };
 
 const slice = createSlice({
@@ -38,6 +39,9 @@ const slice = createSlice({
     setIsHotAction: (state, { payload }: PayloadAction<boolean>) => {
       state.isHot = payload;
     },
+    setScoreAction: (state, { payload }: PayloadAction<number>) => {
+      state.score = payload;
+    },
   },
 });
 
@@ -51,6 +55,7 @@ export const {
   setLifeGaugeWidthAction,
   setHotMeterAction,
   setIsHotAction,
+  setScoreAction,
 } = HUDActions;
 
 export { HUDReducer, HUDActions };

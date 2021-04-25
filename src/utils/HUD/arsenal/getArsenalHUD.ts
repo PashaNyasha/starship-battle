@@ -2,14 +2,14 @@ import { ctx } from "../../..";
 import {
   ORANGE_COLOR,
   ORANGE_RED_COLOR,
-  RED_COLOR,
   WHITE_COLOR,
   YELLOW_COLOR,
 } from "../../../constants/colors";
 import { FULL_CIRCLE_DEGREE } from "../../../constants/HUD";
-import { getBulletsSelector } from "../../../store/arsenal/selectors";
-import { getCanvasSizeSelector } from "../../../store/canvas/selectors";
-import { getHotMeterSelector, isHotSelector } from "../../../store/HUD/selectors";
+import {
+  getHotMeterSelector,
+  isHotSelector,
+} from "../../../store/HUD/selectors";
 import { StoreType } from "../../../store/store";
 import { checkIsTimeToRed } from "./checkIsTimeToRed";
 import { getHotColor } from "./getHotColor";
@@ -18,9 +18,11 @@ const COORDINATE = 100;
 
 const getRadians = (degress: number) => (Math.PI / 180) * degress;
 
-export const getArsenalHUD = (state: StoreType) => {
-  const { canvasWidth, canvasHeight } = getCanvasSizeSelector(state);
-  const bullets = getBulletsSelector(state);
+export const getArsenalHUD = (
+  state: StoreType,
+  canvasWidth: number,
+  canvasHeight: number
+) => {
   const hotMeter = getHotMeterSelector(state);
   const isHot = isHotSelector(state);
   ctx.lineWidth = 4;

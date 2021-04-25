@@ -6,7 +6,7 @@ import { initialStateAliens } from "./slice";
 const getAliensStorageSelector = (store: StoreType) =>
   store.aliens || initialStateAliens;
 
-export const getAliensSelector = createSelector(
+export const getWallSelector = createSelector(
   [getAliensStorageSelector],
-  ({ aliens }: IAliensStorage): IAlien[] => aliens
+  ({ wall }: IAliensStorage): IAlien[] => wall
 );
