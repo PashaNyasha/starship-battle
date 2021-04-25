@@ -2,6 +2,7 @@ import { ctx } from "../..";
 import { BLOCK_SIZE } from "../../constants/canvas";
 import { YELLOW_COLOR } from "../../constants/colors";
 import { CIRCLE_270_DEGREE, FULL_CIRCLE_DEGREE } from "../../constants/HUD";
+import { getWallSelector } from "../../store/aliens/selectors";
 import { IBullet } from "../../store/arsenal/interfaces";
 import {
   getBulletsSelector,
@@ -12,6 +13,7 @@ import { getHotMeterSelector, isHotSelector } from "../../store/HUD/selectors";
 import { setHotMeterAction, setIsHotAction } from "../../store/HUD/slice";
 import { getShipXSelector, getShipYSelector } from "../../store/ship/selectors";
 import { dispatch, StoreType } from "../../store/store";
+import { confirmHitToAlien } from "../hits/confirmHitToAlien";
 
 export const getShoot = (state: StoreType) => {
   const bullets = getBulletsSelector(state);
@@ -20,12 +22,17 @@ export const getShoot = (state: StoreType) => {
   const shipY = getShipYSelector(state);
   const hotMeter = getHotMeterSelector(state);
   const isHot = isHotSelector(state);
+  const wall = getWallSelector(state);
 
   const newBullets = bullets.reduce((acc, bullet) => {
     const { bulletX, bulletY, bulletSize } = bullet;
     const isBulletOutOfScreen = bulletY < 0;
 
-    if (!isBulletOutOfScreen) {
+    const bulletOnTarget = wall.find(({ alienX, alienY, alienSize }) =>
+      confirmHitToAlien({ bulletX, bulletY, alienX, alienY, alienSize })
+    );
+
+    if (!isBulletOutOfScreen && !bulletOnTarget) {
       const newY = bulletY - 10;
 
       ctx.fillStyle = YELLOW_COLOR;
@@ -46,6 +53,7 @@ export const getShoot = (state: StoreType) => {
       bulletX,
       bulletY,
       bulletImageSrc: "",
+      bulletDmg: 20,
     };
 
     newBullets.push(newBullet);

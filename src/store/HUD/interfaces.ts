@@ -8,4 +8,5 @@ export interface IHUDStorage extends IHUDParams {
   lifeGaugeWidth: number;
   hotMeter: number;
   isHot: boolean;
+  score: number;
 }

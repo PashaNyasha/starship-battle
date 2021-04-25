@@ -33,3 +33,8 @@ export const isHotSelector = createSelector(
   [getHUDStorageSelector],
   ({ isHot }: IHUDStorage): boolean => isHot
 );
+
+export const getScoreSelector = createSelector(
+  [getHUDStorageSelector],
+  ({ score }: IHUDStorage): number => score
+);
