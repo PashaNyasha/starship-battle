@@ -3,6 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:PashaNyasha/starship-battle.git"
+  },
   "scripts": {
     "start": "node server.js",
     "dev": "cross-env NODE_ENV=development webpack serve",
