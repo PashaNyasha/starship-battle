@@ -15,6 +15,7 @@ import { checkIsTimeToRed } from "./checkIsTimeToRed";
 import { getHotColor } from "./getHotColor";
 
 const COORDINATE = 100;
+const FONT = '10px Zen-dots';
 
 const getRadians = (degress: number) => (Math.PI / 180) * degress;
 
@@ -33,7 +34,7 @@ export const getArsenalHUD = (
   ctx.arc(
     canvasWidth - COORDINATE,
     canvasHeight - COORDINATE,
-    50,
+    70,
     0,
     getRadians(FULL_CIRCLE_DEGREE)
   );
@@ -45,7 +46,7 @@ export const getArsenalHUD = (
   ctx.arc(
     canvasWidth - COORDINATE,
     canvasHeight - COORDINATE,
-    50,
+    70,
     0,
     getRadians(hotMeter)
   );
@@ -59,11 +60,12 @@ export const getArsenalHUD = (
   if (!isHot) {
     ctx.fillStyle = YELLOW_COLOR;
     ctx.fillRect(cX, cY, 30, 30);
-    ctx.fillText("Default", cX - 3, cY + 50);
+    ctx.font = FONT;
+    ctx.fillText("DEFAULT", cX - 13, cY + 50);
   } else {
-    ctx.font = "bold 35px Antonio";
+    ctx.font = "bold 30px Zen-dots";
     const isRed = checkIsTimeToRed();
     ctx.fillStyle = isRed ? ORANGE_COLOR : ORANGE_RED_COLOR;
-    ctx.fillText("H O T", cX - 15, cY + 34);
+    ctx.fillText("H 0 T", cX - 40, cY + 34);
   }
 };
