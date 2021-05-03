@@ -1,5 +1,10 @@
 import { batchActions } from "redux-batched-actions";
-import { setIsShootingAction } from "../store/arsenal/slice";
+import { DOUBLE_SHOOT, SHOOT_VARIANTS_LIST, SINGLE_SHOOT, TRIPLE_SHOOT } from "../constants/arsenal";
+import { KEY_CODES } from "../constants/keyCodes";
+import {
+  setIsShootingAction,
+  setShootVariantAction,
+} from "../store/arsenal/slice";
 import {
   setHpDamageWidthAction,
   setLifeGaugeWidthAction,
@@ -14,17 +19,6 @@ import {
 import { dispatch } from "../store/store";
 import { getHPDamage } from "./HUD/hp/getHPDamage";
 
-const ARROW_UP = "ArrowUp";
-const ARROW_LEFT = "ArrowLeft";
-const ARROW_DOWN = "ArrowDown";
-const ARROW_RIGHT = "ArrowRight";
-const SPACE = "Space";
-
-const W = "KeyW";
-const A = "KeyA";
-const S = "KeyS";
-const D = "KeyD";
-
 type ParamsType = {
   event: KeyboardEvent;
   isKeydown: boolean;
@@ -32,35 +26,50 @@ type ParamsType = {
 
 export const getPressedKey = ({ event: { code }, isKeydown }: ParamsType) => {
   switch (code) {
-    case ARROW_UP:
-    case W: {
+    case KEY_CODES.ARROW_UP:
+    case KEY_CODES.W: {
       dispatch(setShipisUpAction(isKeydown));
       break;
     }
 
-    case ARROW_LEFT:
-    case A: {
+    case KEY_CODES.ARROW_LEFT:
+    case KEY_CODES.A: {
       dispatch(setShipisLeftAction(isKeydown));
       break;
     }
 
-    case ARROW_DOWN:
-    case S: {
+    case KEY_CODES.ARROW_DOWN:
+    case KEY_CODES.S: {
       dispatch(setShipisDownAction(isKeydown));
       break;
     }
 
-    case ARROW_RIGHT:
-    case D: {
+    case KEY_CODES.ARROW_RIGHT:
+    case KEY_CODES.D: {
       dispatch(setShipisRightAction(isKeydown));
       break;
     }
 
-    case SPACE: {
+    case KEY_CODES.SPACE: {
       dispatch(setIsShootingAction(isKeydown));
       break;
     }
 
+    case KEY_CODES.Digit1: {
+      dispatch(setShootVariantAction(SINGLE_SHOOT));
+      break;
+    }
+
+    case KEY_CODES.Digit2: {
+      dispatch(setShootVariantAction(DOUBLE_SHOOT));
+      break;
+    }
+
+    case KEY_CODES.Digit3: {
+      dispatch(setShootVariantAction(TRIPLE_SHOOT));
+      break;
+    }
+ 
     // Todo удалить
     case "KeyL": {
       const { hp, damageWidth, lifeGaugeWidth } = getHPDamage({});
@@ -74,7 +83,6 @@ export const getPressedKey = ({ event: { code }, isKeydown }: ParamsType) => {
       );
       break;
     }
-
     default:
       return;
   }

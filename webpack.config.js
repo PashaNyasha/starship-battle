@@ -5,6 +5,7 @@ const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin');
 const ImageMinimizerPlugin = require('image-minimizer-webpack-plugin');
 const ESLintWebpackPlugin = require('eslint-webpack-plugin');
 const MiniCssExtraPlugin = require('mini-css-extract-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 const IS_DEV = !IS_PRODUCTION;
@@ -84,7 +85,13 @@ module.exports = {
             }
           }),
 
-          new ESLintWebpackPlugin()
+          new ESLintWebpackPlugin(),
+
+          new CopyPlugin({
+              patterns: [
+                { from: 'src/assets/fonts', to: 'assets/fonts' }
+              ]
+          }),
     ],
 
     module: {
@@ -122,8 +129,8 @@ module.exports = {
                 test: /\.(woff(2)?|eot|ttf|otf|svg|)$/, 
                 loader: 'url-loader',
                 options: {
-                    limit: 8192,
-                    name: 'fonts/[name].[ext]'
+                    limit: 10 * 1024,
+                    name: 'assets/fonts/[name].[ext]'
                 }
             },
         ]

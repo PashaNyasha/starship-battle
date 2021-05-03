@@ -1,11 +1,5 @@
 import { ctx } from "../../..";
-import {
-  GREEN_COLOR,
-  WHITE_COLOR,
-  BLACK_COLOR,
-  TRANSPARENT,
-  RED_COLOR,
-} from "../../../constants/colors";
+import { GREEN_COLOR, WHITE_COLOR, RED_COLOR } from "../../../constants/colors";
 import {
   FONT_STYLE,
   HP_BAR_HEIGHT,

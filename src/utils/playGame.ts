@@ -6,8 +6,8 @@ import { changeShipDirection } from "./ship/changeShipDirection";
 import { createBackground } from "./canvas/createBackground";
 import { getHUD } from "./HUD/getHUD";
 import { getShoot } from "./arsenal/getShoot";
-import { getAliens } from "./aliens/getAliens";
-
+import { getShootVariantSelector } from "../store/arsenal/selectors";
+ 
 const { getState } = store;
 const oldState = getState();
 
@@ -19,12 +19,15 @@ shipImage.src = SHIPS_IMAGES_BY_LEVEL[shipLevel];
 export const playGame = () => {
   const state = getState();
   const { canvasWidth, canvasHeight } = getCanvasSizeSelector(state);
+  const shootVariant = getShootVariantSelector(state);
 
   createBackground({ canvasWidth, canvasHeight, state });
 
   changeShipDirection({ state, speed: SHIP_SPEED_VARIANTS.normal });
-  getShoot(state);
-  getAliens(state);
+  getShoot({ state, shootVariant });
+  // getAliens(state);
+
   getHUD(state);
+
   requestAnimationFrame(playGame);
 };
