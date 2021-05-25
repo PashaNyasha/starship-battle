@@ -1,4 +1,3 @@
-import { ctx } from "../..";
 import { YELLOW_COLOR } from "../../constants/colors";
 import { CIRCLE_270_DEGREE, FULL_CIRCLE_DEGREE } from "../../constants/HUD";
 import { getWallSelector } from "../../store/aliens/selectors";
@@ -101,7 +100,7 @@ export const getShoot = ({ state, shootVariant }: ParamsType) => {
     shootTimeout = 0;
   }
 
-  if (hotMeter > 0 && !isShooting || isHot) {
+  if ((hotMeter > 0 && !isShooting) || isHot) {
     dispatch(setHotMeterAction(hotMeter - 1));
   }
 

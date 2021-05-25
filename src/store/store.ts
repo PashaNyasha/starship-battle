@@ -7,6 +7,7 @@ import { batchDispatchMiddleware } from "redux-batched-actions";
 import { alienslReducer } from "./aliens/slice";
 import { arsenalReducer } from "./arsenal/slice";
 import { canvasReducer } from "./canvas/slice";
+import { effectsReducer } from "./effects/slice";
 import { HUDReducer } from "./HUD/slice";
 import { shipReducer } from "./ship/slice";
 
@@ -14,6 +15,7 @@ const reducer = combineReducers({
   aliens: alienslReducer,
   arsenal: arsenalReducer,
   canvas: canvasReducer,
+  effects: effectsReducer,
   HUD: HUDReducer,
   ship: shipReducer
 });

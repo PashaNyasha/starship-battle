@@ -1,8 +1,9 @@
 import { batchActions } from "redux-batched-actions";
-import { DOUBLE_SHOOT, SHOOT_VARIANTS_LIST, SINGLE_SHOOT, TRIPLE_SHOOT } from "../constants/arsenal";
+import { DOUBLE_SHOOT, SINGLE_SHOOT, TRIPLE_SHOOT } from "../constants/arsenal";
 import { KEY_CODES } from "../constants/keyCodes";
 import {
   setIsShootingAction,
+  setIsSpecialShootAction,
   setShootVariantAction,
 } from "../store/arsenal/slice";
 import {
@@ -69,7 +70,12 @@ export const getPressedKey = ({ event: { code }, isKeydown }: ParamsType) => {
       dispatch(setShootVariantAction(TRIPLE_SHOOT));
       break;
     }
- 
+
+    case KEY_CODES.Enter: {
+      dispatch(setIsSpecialShootAction(isKeydown));
+      break;
+    }
+
     // Todo удалить
     case "KeyL": {
       const { hp, damageWidth, lifeGaugeWidth } = getHPDamage({});

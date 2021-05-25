@@ -1,5 +1,5 @@
 import { DOUBLE_SHOOT, SINGLE_SHOOT, TRIPLE_SHOOT } from "../constants/arsenal";
-import { IBullet } from "../store/arsenal/interfaces";
+import { IBullet, ISpecialBullet } from "../store/arsenal/interfaces";
 import { StoreType } from "../store/store";
 import { ColorsType } from "./colors";
 import { ShipCoordinatesType } from "./ship";
@@ -41,4 +41,20 @@ export type BulletVariantsType = {
   singleShoot: GetShootVarintType;
   doubleShoot: GetShootVarintType;
   tripleShoot: GetShootVarintType;
+};
+
+export type BulletNamesType = "DEFAULT" | "LASER";
+
+export type SpecialBulletsNamesType = "ball" | "bomb";
+
+export type DrawSpecialBulletParamsType = {
+  state: StoreType;
+  special: ISpecialBullet;
+};
+
+export type DrawSpecialBulletType = (params: DrawSpecialBulletParamsType) => ISpecialBullet;
+
+export type SpecialBulletParamsType = {
+  special: ISpecialBullet;
+  drawMethod: DrawSpecialBulletType;
 };

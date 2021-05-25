@@ -1,8 +1,16 @@
-import { IBullet } from "../store/arsenal/interfaces";
-import { BulletVariantsType, ShootVariantNameType } from "../types/arsenal";
+import {
+  IBullet,
+  ISpecialBullet,
+} from "../store/arsenal/interfaces";
+import {
+  BulletVariantsType,
+  ShootVariantNameType,
+  SpecialBulletsNamesType,
+} from "../types/arsenal";
 import { getDoubleBullet } from "../utils/arsenal/bullets/getDoubleBullet";
 import { getSingleBullet } from "../utils/arsenal/bullets/getSingleBullet";
 import { getTripleBullet } from "../utils/arsenal/bullets/getTripleBullet";
+import { BLOCK_SIZE } from "./canvas";
 
 export const NORMAL_SHOOT_SPEED = 35;
 export const FAST_SHOOT_SPEED = 20;
@@ -32,8 +40,45 @@ export const TRIPLE_BULLETS: IBullet = {
   bullet3Y: 0,
 };
 
+export const CHACRAM: IBullet = {
+  bulletWidth: 14,
+  bulletHeight: 15,
+  bulletX: 0,
+  bulletY: 0,
+  bulletDmg: 100,
+};
+
 export const BULLET_VARIANTS: BulletVariantsType = {
   singleShoot: getSingleBullet,
   doubleShoot: getDoubleBullet,
   tripleShoot: getTripleBullet,
+};
+
+const BALL_SPEED = 30;
+
+export const BALL: ISpecialBullet = {
+  radius: BLOCK_SIZE / 2,
+  specialX: 0,
+  specialY: 0,
+  specialDmg: 100,
+  dX: BALL_SPEED,
+  dY: -BALL_SPEED,
+  isInit: true,
+};
+
+export const BOMB: ISpecialBullet = {
+  specialWidth: BLOCK_SIZE,
+  specialHeight: BLOCK_SIZE,
+  specialX: 0,
+  specialY: 0,
+  specialDmg: 250,
+  isInit: true,
+};
+
+export const SPECIAL_BULLETS: Record<
+  SpecialBulletsNamesType,
+  ISpecialBullet
+> = {
+  ball: BALL,
+  bomb: BOMB,
 };

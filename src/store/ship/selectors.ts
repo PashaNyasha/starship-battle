@@ -1,4 +1,5 @@
 import { createSelector } from "reselect";
+import { ShipCoordinatesType } from "../../types/ship";
 import { StoreType } from "../store";
 import { IShipStorage, ShipLevelsType } from "./interfaces";
 import { initialStateShip } from "./slice";
@@ -24,6 +25,11 @@ export const getShipXSelector = createSelector(
 export const getShipYSelector = createSelector(
   [getShipStorageSelector],
   ({ shipY }: IShipStorage): number => shipY
+);
+
+export const getShipCoordinatesSelector = createSelector(
+  [getShipXSelector, getShipYSelector],
+  (shipX: number, shipY: number): ShipCoordinatesType => ({ shipX, shipY })
 );
 
 export const isShipUpSelector = createSelector(

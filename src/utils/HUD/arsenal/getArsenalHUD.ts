@@ -5,19 +5,19 @@ import {
   WHITE_COLOR,
   YELLOW_COLOR,
 } from "../../../constants/colors";
+import { DEGREE_360 } from "../../../constants/common";
 import { FULL_CIRCLE_DEGREE } from "../../../constants/HUD";
 import {
   getHotMeterSelector,
   isHotSelector,
 } from "../../../store/HUD/selectors";
 import { StoreType } from "../../../store/store";
+import { getDegree } from "../../getDegree";
 import { checkIsTimeToRed } from "./checkIsTimeToRed";
 import { getHotColor } from "./getHotColor";
 
 const COORDINATE = 100;
-const FONT = '10px Zen-dots';
-
-const getRadians = (degress: number) => (Math.PI / 180) * degress;
+const FONT = "10px Zen-dots";
 
 export const getArsenalHUD = (
   state: StoreType,
@@ -36,7 +36,7 @@ export const getArsenalHUD = (
     canvasHeight - COORDINATE,
     70,
     0,
-    getRadians(FULL_CIRCLE_DEGREE)
+    DEGREE_360
   );
   ctx.stroke();
 
@@ -48,7 +48,7 @@ export const getArsenalHUD = (
     canvasHeight - COORDINATE,
     70,
     0,
-    getRadians(hotMeter)
+    getDegree(hotMeter)
   );
 
   ctx.stroke();
